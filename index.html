@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neon Bit Arcade</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="#hub" aria-label="Neon Bit Arcade home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>Neon Bit Arcade</span>
+    </a>
+    <nav class="top-nav" aria-label="Game navigation">
+      <a href="#arcade" data-nav-game="tetris">Tetris</a>
+      <a href="#arcade" data-nav-game="snake">Snake</a>
+      <a href="#arcade" data-nav-game="tictactoe">Tic-Tac-Toe</a>
+      <a href="#arcade" data-nav-game="wordle">Wordle</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hub" class="hero">
+      <div class="pixel-character scout" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <div class="pixel-character rogue" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <div class="hero-copy">
+        <p class="kicker">Low-brainpower, high-loop fun</p>
+        <h1>Pick a cabinet and drop into the grid.</h1>
+        <p>
+          A compact browser arcade with crunchy pixel energy, dark-room neon, and four fast games built for quick restarts.
+        </p>
+      </div>
+      <div class="cabinet-grid" aria-label="Game selection">
+        <a class="game-card active-card" href="#arcade" data-select-game="tetris">
+          <span class="card-icon tetris-icon" aria-hidden="true">
+            <i></i><i></i><i></i><i></i>
+          </span>
+          <span class="card-title">Tetris</span>
+          <span class="card-meta">Stack, clear, survive</span>
+        </a>
+        <a class="game-card" href="#arcade" data-select-game="snake">
+          <span class="card-icon snake-icon" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i>
+          </span>
+          <span class="card-title">Snake</span>
+          <span class="card-meta">Eat, grow, dodge</span>
+        </a>
+        <a class="game-card" href="#arcade" data-select-game="tictactoe">
+          <span class="card-icon xo-icon" aria-hidden="true">
+            <i>X</i><i>O</i>
+          </span>
+          <span class="card-title">Tic-Tac-Toe</span>
+          <span class="card-meta">Read the board</span>
+        </a>
+        <a class="game-card" href="#arcade" data-select-game="wordle">
+          <span class="card-icon wordle-icon" aria-hidden="true">
+            <i>W</i><i>O</i><i>R</i><i>D</i>
+          </span>
+          <span class="card-title">Wordle</span>
+          <span class="card-meta">Guess the signal</span>
+        </a>
+      </div>
+    </section>
+
+    <section id="arcade" class="arcade-shell" aria-live="polite">
+      <div class="machine-panel">
+        <div class="machine-top">
+          <div>
+            <p class="panel-label">Now playing</p>
+            <h2 id="gameTitle">Tetris</h2>
+          </div>
+          <div class="status-stack">
+            <span id="gameStatus">Arrow keys or buttons to move. Clear lines to score.</span>
+            <strong id="gameScore">Score 0</strong>
+          </div>
+        </div>
+
+        <div class="game-stage">
+          <article id="tetris" class="game-view current" data-game-view="tetris">
+            <canvas id="tetrisBoard" width="240" height="400" aria-label="Tetris game board"></canvas>
+            <div class="side-panel">
+              <div class="mini-screen">
+                <span>Next</span>
+                <canvas id="nextPiece" width="96" height="96" aria-label="Next Tetris piece"></canvas>
+              </div>
+              <button class="primary-btn" type="button" data-action="restart-tetris">Restart</button>
+            </div>
+          </article>
+
+          <article id="snake" class="game-view" data-game-view="snake">
+            <canvas id="snakeBoard" width="360" height="360" aria-label="Snake game board"></canvas>
+            <div class="side-panel">
+              <div class="mini-screen">
+                <span>Best</span>
+                <strong id="snakeBest">0</strong>
+              </div>
+              <button class="primary-btn" type="button" data-action="restart-snake">Restart</button>
+            </div>
+          </article>
+
+          <article id="tictactoe" class="game-view" data-game-view="tictactoe">
+            <div class="tic-board" role="group" aria-label="Tic-Tac-Toe board">
+              <button type="button" aria-label="Cell 1"></button>
+              <button type="button" aria-label="Cell 2"></button>
+              <button type="button" aria-label="Cell 3"></button>
+              <button type="button" aria-label="Cell 4"></button>
+              <button type="button" aria-label="Cell 5"></button>
+              <button type="button" aria-label="Cell 6"></button>
+              <button type="button" aria-label="Cell 7"></button>
+              <button type="button" aria-label="Cell 8"></button>
+              <button type="button" aria-label="Cell 9"></button>
+            </div>
+            <div class="side-panel">
+              <div class="mini-screen">
+                <span>Turn</span>
+                <strong id="ticTurn">X</strong>
+              </div>
+              <button class="primary-btn" type="button" data-action="restart-tic">Restart</button>
+            </div>
+          </article>
+
+          <article id="wordle" class="game-view" data-game-view="wordle">
+            <div class="wordle-panel" aria-label="Wordle game board">
+              <div id="wordleBoard" class="wordle-board" aria-label="Wordle guesses"></div>
+              <div id="wordleKeyboard" class="wordle-keyboard" aria-label="Wordle keyboard"></div>
+            </div>
+            <div class="side-panel">
+              <div class="mini-screen">
+                <span>Try</span>
+                <strong id="wordleTurn">1/6</strong>
+              </div>
+              <button class="primary-btn" type="button" data-action="restart-wordle">Restart</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="control-deck" aria-label="Game controls">
+          <button type="button" data-control="left" aria-label="Move left">&#9664;</button>
+          <button type="button" data-control="up" aria-label="Rotate or move up">&#9650;</button>
+          <button type="button" data-control="down" aria-label="Move down">&#9660;</button>
+          <button type="button" data-control="right" aria-label="Move right">&#9654;</button>
+          <button type="button" data-control="action" aria-label="Drop or pause">&#9670;</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>Built with plain HTML, CSS, and JavaScript.</span>
+    <span>Keyboard: arrows, space, enter.</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
